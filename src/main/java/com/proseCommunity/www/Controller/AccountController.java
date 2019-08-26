@@ -1,5 +1,6 @@
 package com.proseCommunity.www.Controller;
 
+import com.proseCommunity.www.Service.AccountService;
 import com.proseCommunity.www.Service.Impl.AccountServiceImpl;
 import com.proseCommunity.www.domain.entity.User;
 import com.proseCommunity.www.utils.Result;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 public class AccountController {
     @Resource
-    AccountServiceImpl accountService;
+    AccountService accountService;
     @Resource
     User user;
             /**

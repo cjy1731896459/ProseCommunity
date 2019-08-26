@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proseCommunity.www.mapper.IndexMapper">
+    <!--首页展示文章附加用户昵称-->
+ <resultMap id="showALLResultMap" type="com.proseCommunity.www.domain.entity.Article">
+     <id column="article_id" property="articleId"/>
+     <result  column="article_title" property="articleTitle"/>
+     <result column="article_content" property="articleContent"/>
+ </resultMap>
+    <resultMap id="userResultMap"
+               type="com.proseCommunity.www.domain.vo.ArticleVo" extends="showALLResultMap">
+        <collection property="indexArticle" ofType="com.proseCommunity.www.domain.entity.User">
+                <id property="uid" column="uid"/>
+            <result property="userName" column="user_name"/>
+        </collection>
+    </resultMap>
+    <select id="showAll" resultMap="userResultMap">
+        SELECT a.article_title,article_content
+        FROM article a LEFT JOIN user u ON a.uid = u.uid
+        WHERE status = 0;
+    </select>
+</mapper>

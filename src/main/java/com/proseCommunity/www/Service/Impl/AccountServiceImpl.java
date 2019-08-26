@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Resource
@@ -28,6 +29,13 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    /**
+     *注册
+     */
+
     @Override
     public int register(User user) { return userMapper.regiter(user); }
+
+
+
 }
