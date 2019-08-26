@@ -11,7 +11,7 @@
     <!--  1. 配置连接池-->
     <!--  2.SqlSessionFactory  -->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean"
-          p:dataSource-ref="dataSource" p:typeAliasesPackage="com.projectTest.www.domain.entity"
+          p:dataSource-ref="dataSource" p:typeAliasesPackage="com.proseCommunity.www.domain.entity"
           p:configLocation="classpath:mybatis-config.xml"
           p:mapperLocations="classpath:/mappers/**/*.xml" />
 
