@@ -17,4 +17,12 @@ public class indexServiceImpl implements IndexService {
      * 首页展示*/
     @Override
     public List<ArticleVo> showAll() { return indexMapper.showAll(); }
+
+    /**
+     * 搜索框 模糊查询
+     * */
+    @Override
+    public List<Article> search(String keyword){
+
+    }
 }

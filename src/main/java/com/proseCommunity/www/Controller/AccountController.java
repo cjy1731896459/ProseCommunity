@@ -2,9 +2,11 @@ package com.proseCommunity.www.Controller;
 
 import com.proseCommunity.www.Service.AccountService;
 import com.proseCommunity.www.Service.Impl.AccountServiceImpl;
+import com.proseCommunity.www.domain.entity.Article;
 import com.proseCommunity.www.domain.entity.User;
 import com.proseCommunity.www.utils.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,4 +47,12 @@ public class AccountController {
                 return Result.success("success");
                 }else{ return Result.error();}
             }
-        }
+    /**
+     * 搜索框
+     * */
+    @RequestMapping(value = "/search")
+    public Result<List<Article>> search(@Param("Keyword")String keyword){
+
+    }
+}
+

@@ -17,6 +17,8 @@ public class IndexController {
     @Resource
     IndexService indexService;
 
+    /**
+     * 展示文章*/
     @RequestMapping(value = "/showAll")
     public Result<List<ArticleVo>> showAll(){
         List<ArticleVo> articleVos = indexService.showAll();
@@ -26,5 +28,6 @@ public class IndexController {
             return Result.error();
         }
     }
+
 
 }

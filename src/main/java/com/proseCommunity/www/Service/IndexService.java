@@ -11,4 +11,9 @@ public interface IndexService {
      * */
     List<ArticleVo> showAll();
 
+    /**
+     * 搜索框 模糊查询
+     * */
+    List<Article> search(String keyword);
+
 }

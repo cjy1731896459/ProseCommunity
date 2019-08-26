@@ -5,8 +5,6 @@ import com.proseCommunity.www.domain.entity.User;
 
 import java.util.List;
 
-public class ArticleVo extends Article {
-
-    List<User> indexArticle;
-
+public class UserVo extends User {
+    List<Article> showUser;
 }
