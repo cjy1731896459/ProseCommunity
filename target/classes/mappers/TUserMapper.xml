@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proseCommunity.www.mapper.TUserMapper">
+    <resultMap id="TUserBaseMap" type="com.proseCommunity.www.domain.entity.TUser">
+        <id property="uid" column="uid"/>
+        <result property="userName" column="user_name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="password" column="password"/>
+        <result property="userImg" column="user_img"/>
+        <result property="userSex" column="user_sex"/>
+        <result property="userDetails" column="user_details"/>
+        <result property="status" column="status"/>
+        <result property="articleNum" column="articleNum"/>
+        <result property="attentionNum" column="attention_num"/>
+        <result property="fansNum" column="fans_num"/>
+        <result property="clickNumSum" column="click_num_sum"/>
+    </resultMap>
+    <resultMap id="TUserVOMap" type="com.proseCommunity.www.domain.vo.TUserVO" extends="TUserBaseMap">
+
+    </resultMap>
+    <select id="login" resultMap="TUserVOMap">
+        select u.user_name,u.password
+        from blogs.t_user u where u.user_name=#{username}
+    </select>
+    <insert id="register" >
+        insert into blogs.t_user(user_name, nickname, password) value (
+            #{username},#{nickname},#{password})
+    </insert>
+    <update id="resetPassword">
+        update blogs.t_user u set password=#{password} where u.user_name=#{username}
+    </update>
+</mapper>
