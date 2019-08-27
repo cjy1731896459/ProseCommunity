@@ -1,58 +1,80 @@
 package com.proseCommunity.www.Controller;
 
-import com.proseCommunity.www.Service.AccountService;
-import com.proseCommunity.www.Service.Impl.AccountServiceImpl;
-import com.proseCommunity.www.domain.entity.Article;
-import com.proseCommunity.www.domain.entity.User;
+import com.proseCommunity.www.Service.impl.UserServiceImpl;
+import com.proseCommunity.www.domain.vo.TUserVO;
 import com.proseCommunity.www.utils.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@Slf4j
-@RequestMapping
+/**
+ * @author WangPeiren
+ */
+@RequestMapping("/account")
 @RestController
+@Slf4j
 public class AccountController {
     @Resource
-    AccountService accountService;
-    @Resource
-    User user;
-            /**
-             * 登录
-             * */
-    @RequestMapping(value = "/login",params = {"username","password"})
-    public Result<User> login(String username,String password){
-        user.setUserName(username);
-        user.setPassword(password);
-        List<User> login = accountService.login(user);
-            if (login!=null){
-                return Result.success(login);
-            }else {
-                return Result.error();
+    UserServiceImpl service;
+    /**
+     * 登录功能
+     */
+    @RequestMapping("/login")
+    public Result login(String username, String password){
+        try {
+            Result result = service.login(username, password);
+            return result;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error();
         }
     }
-        /**
-         *注册
-         * */
-        @RequestMapping(value = "/register",params = {"username","password","sex","userimg","userdetails"})
-        public Result<Integer> register(String username,String password,String sex,String userimg,String userdetails){
-            user.setUserName(username);
-            user.setPassword(password);
-            int register = accountService.register(user);
-            if (register==1){
-                return Result.success("success");
-                }else{ return Result.error();}
-            }
+
     /**
-     * 搜索框
-     * */
-    @RequestMapping(value = "/search")
-    public Result<List<Article>> search(@Param("Keyword")String keyword){
+     * 注册功能
+     * @param username 用户名字
+     * @param nickname 昵称
+     * @param password 密码
+     * @return
+     */
+    @RequestMapping("/register")
+    public Result register(String username,String nickname,String password) {
+        try {
+            int rows = service.register(username, nickname, password);
+            if (rows>0) {
+                return Result.success(rows);
+            }else {
+                throw new Exception("数据出错");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error();
+        }
+    }
+
+    /**
+     * 重置密码
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping("/reset/password")
+    public Result resetPassword(String username,String password) {
+        try {
+            int rows = service.resetPassword(username, password);
+            if(rows>0){
+                return Result.success(rows);
+            }else {
+                throw new Exception("注册失败");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error();
+        }
 
     }
 }
-

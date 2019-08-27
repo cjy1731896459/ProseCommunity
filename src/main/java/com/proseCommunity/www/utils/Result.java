@@ -2,24 +2,27 @@ package com.proseCommunity.www.utils;
 
 import lombok.Data;
 
+/**
+ * @author WangPeiren
+ */
 @Data
-public class Result<T>  {
-    private int status;
+public class Result<T> {
     private String message;
-    private T t;
+    private int Status;
+    private T data;
 
-    public static Result success(Object object){
+    public static<T> Result success(T t){
         Result result = new Result();
-        result.setMessage("Success");
-        result.setStatus(200);
-        result.setT(object);
+        result.setData(t);
+        result.setMessage(Constant.RESULT_SUCCESS);
+        result.setStatus(Constant.RESULT_SUCCESS_STATUS);
         return result;
     }
 
     public static Result error(){
         Result result = new Result();
-        result.setMessage("Error");
-        result.setStatus(404);
+        result.setStatus(Constant.RESULT_ERROR_STATUS);
+        result.setMessage(Constant.RESULT_ERROR);
         return result;
     }
 }
